@@ -47,19 +47,21 @@
 12.Ntldr把控制权交给Ntoskrnl.exe，这时,启动程序结束,装载阶段开始
  ```
 
- 参考资料http://baike.baidu.com/link?url=RKUFAW3zdDOU7Eeuwnj1CQcH9cKUayXI36KYtdyLBYySHeX0huEjl8CAiKtKRW2Liqsk5ZAnDG71tUW-nQe-p_
+ > 参考资料：http://baike.baidu.com/link?url=RKUFAW3zdDOU7Eeuwnj1CQcH9cKUayXI36KYtdyLBYySHeX0huEjl8CAiKtKRW2Liqsk5ZAnDG71tUW-nQe-p_
  
  1. 了解GRUB的启动流程。
  
- ···
-装载stage1
-装载stage1.5
-装载stage2
-读取/boot/grub.conf文件并显示启动菜单
-装载所选的kernel和initrd文件到内存中
- ···
+ > 装载stage1
 
- > 参考资料http://wenku.baidu.com/link?url=mMdriP6cVJoPu_kyguFMofHMkEai9S2w7lrm3GaiUi2WhS6WFDUW01ptUoikTVy62Uoi3BRJ6zc8ANtXYGKtLfEzBggghWmJZfUP5FbyvhG
+ > 装载stage1.5
+
+ > 装载stage2
+
+ > 读取/boot/grub.conf文件并显示启动菜单
+
+ > 装载所选的kernel和initrd文件到内存中
+
+ > 参考资料：http://wenku.baidu.com/link?url=mMdriP6cVJoPu_kyguFMofHMkEai9S2w7lrm3GaiUi2WhS6WFDUW01ptUoikTVy62Uoi3BRJ6zc8ANtXYGKtLfEzBggghWmJZfUP5FbyvhG
 
  1. 比较NTLDR和GRUB的功能有差异。
 
@@ -79,7 +81,7 @@
 
  > 特殊功能XIP内核引导；
 
- > 参考资料http://baike.baidu.com/link?url=UfBPpWF2eZrlLX_VGKL83Kw10e1ybo51O16R_hMaX9Pb3FVmRxTOpSlw6lblvCs0NfbKejAsrIxHzwy7GaJ4_q#3
+ > 参考资料：http://baike.baidu.com/link?url=UfBPpWF2eZrlLX_VGKL83Kw10e1ybo51O16R_hMaX9Pb3FVmRxTOpSlw6lblvCs0NfbKejAsrIxHzwy7GaJ4_q#3
 
 ## 3.3 中断、异常和系统调用比较
  1. 举例说明Linux中有哪些中断，哪些异常？
