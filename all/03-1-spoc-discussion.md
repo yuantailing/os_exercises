@@ -50,7 +50,7 @@ NOTICE
 
 > 说明：学号 mod 4 == 1，实现最差匹配算法。
 
-> 设计思路：分配时，查找最大的一块，切开分配；如果最大的一块也不能满足要求，则分配失败。释放时，查找相邻块，合并。
+> 设计思路：分配时，查找最大的一块，切开分配；如果最大的一块也不能满足要求，则分配失败。释放时，查找相邻块，合并。为了表示方便，这里一字节代表一页。
 
 > 测试用例：在128字节的内存池里，依次分配16、48、28字节，然后释放48字节，再分配32、16、16、16字节，打印各次分配结果。
 
@@ -155,8 +155,7 @@ void show_offset(void *a, void *b, char const *name) {
 
 int main() {
     PmmManager pmm(128);
-    typedef void *pvoid;
-    pvoid p0, p1, p2, p3, p4, p5, p6, offset = pmm.get_offset();
+    void *p0, *p1, *p2, *p3, *p4, *p5, *p6, *offset = pmm.get_offset();
     p0 = pmm.alloc(16);
     p1 = pmm.alloc(48);
     p2 = pmm.alloc(28);
