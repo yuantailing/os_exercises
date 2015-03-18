@@ -22,7 +22,11 @@ NOTICE
  ```
 - [x]  
 
->  
+> 64bit CPU通常有52位物理地址，物理地址空间2^52 Byte = 4 PB。使用四级页表（PML4、PDPT、PD、PT），页大小可以是4 KB，2 MB，或1 GB。只有逻辑地址的最低48位才会在地址转换，因此虚拟地址空间为2 ^ 48 Byte = 256 TB。
+
+> 映射过程：PML4包含512个采用48位实现的表项，故将逻辑地址的第39~47（最低位从0开始数）在PML4中映射出PDPT的页号。以此类推，再从PDPT中映射PD页号，然后从PD映射出PT页号，最后从PT中查出真实页号，即可得物理地址。
+
+> 参考资料：http://zh.wikipedia.org/wiki/X86-64
 
 ## 小组思考题
 ---
@@ -31,7 +35,7 @@ NOTICE
 
 - [x]  
 
-> 500=0.9\*150+0.1\*x
+> 0.5 us = 500 ns。设不在页面的平均访问时间为x ns，则500 = 0.9 × 150 + 0.1 × x，解得x = 3650 (ns)，即3.65 us。
 
 （2）(spoc) 有一台假想的计算机，页大小（page size）为32 Bytes，支持32KB的虚拟地址空间（virtual address space）,有4KB的物理内存空间（physical memory），采用二级页表，一个页目录项（page directory entry ，PDE）大小为1 Byte,一个页表项（page-table entries
 PTEs）大小为1 Byte，1个页目录表大小为32 Bytes，1个页表大小为32 Bytes。页目录基址寄存器（page directory base register，PDBR）保存了页目录表的物理地址（按页对齐）。
@@ -81,7 +85,56 @@ Virtual Address 7268:
       --> Translates to Physical Address 0xca8 --> Value: 16
 ```
 
+```
+Virtual Address 6c74:
+  --> pde index:0x1b  pde contents:(valid 1, pfn 0x20)
+    --> pte index:0x03  pte contents:(valid 1, pfn 0x61)
+      --> Translates to Physical Address 0x0c34 --> Value: 0x06
 
+Virtual Address 6b22:
+  --> pde index:0x1a  pde contents:(valid 1, pfn 0x52)
+    --> pte index:0x19  pte contents:(valid 1, pfn 0x47)
+      --> Translates to Physical Address 0x08e2 --> Value: 0x1a
+
+Virtual Address 03df:
+  --> pde index:0x00  pde contents:(valid 1, pfn 0x5a)
+    --> pte index:0x1e  pte contents:(valid 1, pfn 0x05)
+      --> Translates to Physical Address 0x00bf --> Value: 0x0f
+
+Virtual Address 69dc:
+  --> pde index:0x1a  pde contents:(valid 1, pfn 0x52)
+    --> pte index:0x0e  pte contents:(valid 0, pfn 0x7f)
+      --> Fault (page table entry not valid)
+
+Virtual Address 317a:
+  --> pde index:0x0c  pde contents:(valid 1, pfn 0x18)
+    --> pte index:0x0b  pte contents:(valid 1, pfn 0x35)
+      --> Translates to Physical Address 0x06ba --> Value: 0x1e
+
+Virtual Address 4546:
+  --> pde index:0x1b  pde contents:(valid 1, pfn 0x21)
+    --> pte index:0xb  pte contents:(valid 0, pfn 0x7f)
+      --> Fault (page table entry not valid)
+
+Virtual Address 2c03:
+  --> pde index:0x11  pde contents:(valid 1, pfn 0x44)
+    --> pte index:0x0a  pte contents:(valid 1, pfn 0x57)
+      --> Translates to Physical Address 0x0ae3 --> Value: 0x16
+
+Virtual Address 7fd7:
+  --> pde index:0x1f  pde contents:(valid 1, pfn 0x12)
+    --> pte index:0x1e  pte contents:(valid 0, pfn 0x7f)
+      --> Fault (page table entry not valid)
+
+Virtual Address 390e:
+  --> pde index:0x0e  pde contents:(valid 0, pfn 0x7f)
+      --> Fault (page table entry not valid)
+
+Virtual Address 748b:
+  --> pde index:0x1d  pde contents:(valid 1, pfn 0x00)
+    --> pte index:0x04  pte contents:(valid 0, pfn 0x7f)
+      --> Fault (page table entry not valid)
+```
 
 （3）请基于你对原理课二级页表的理解，并参考Lab2建页表的过程，设计一个应用程序（可基于python, ruby, C, C++，LISP等）可模拟实现(2)题中描述的抽象OS，可正确完成二级页表转换。
 
