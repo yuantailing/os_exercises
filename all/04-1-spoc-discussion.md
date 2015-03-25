@@ -35,6 +35,47 @@ time ./goodlocality
 ```
 可以看到其执行时间。
 
+> 以上程序用时
+
+```
+real	0m0.051s
+user	0m0.046s
+sys	0m0.004s
+```
+
+> 下面是一个体现内存访问局部性好的简单应用程序例子。
+
+```
+#include <stdio.h>
+#define NUM 1024
+#define COUNT 10
+int A[NUM][NUM];
+int main() {
+  int i, j, k;
+  for (k = 0; k < COUNT; k++)
+    for (i = 0; i < NUM; i++)
+      for (j = 0; j < NUM; j++)
+        A[j][i] = i + j;
+  printf("%d count computing over!\n", i * j * k);
+  return 0;
+}
+```
+
+> 可以用下的命令来编译和运行此程序：
+
+```
+gcc -O0 -o badlocality badlocality.c
+time ./badlocality
+```
+
+> 用时
+
+```
+real	0m0.183s
+user	0m0.173s
+sys	0m0.005s
+```
+
 ## 小组思考题目
 ----
 
