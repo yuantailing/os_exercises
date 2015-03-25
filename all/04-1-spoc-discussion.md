@@ -160,6 +160,53 @@ Virtual Address 1e6f(0 001_11 10_011 0_1111):
       --> To Disk Sector Address 0x2cf(0001011001111) --> Value: 1c
 ```
 
+> 结果
+
+```
+Virtual Address 6653(0 11001 10010 10011):
+  --> pde index:0x19(11001)  pde contents:(0x7f, 01111111, valid 0, pfn 0x7f)
+  page 6c: e1 b5 a1 c1 b3 e4 a6 bd 7f 7f 7f 7f 7f 7f 7f 7f
+           7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f
+      --> Page not exists
+
+Virtual Address 1c13(0 00111 00000 10011):
+  --> pde index:0x07(00111)  pde contents:(0xbd, 10111101, valid 1, pfn 0x3d)
+  page 6c: e1 b5 a1 c1 b3 e4 a6 bd 7f 7f 7f 7f 7f 7f 7f 7f
+           7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f
+  page 3d: f6 7f 5d 4d 7f 04 29 7f 1e 7f ef 51 0c 1c 7f 7f
+           7f 76 d1 16 7f 17 ab 55 9a 65 ba 7f 7f 0b 7f 7f
+    --> pte index:0x00(00000)  pte contents:(0xf6, valid 1, pfn 0x76)
+  page 76: 1a 1b 1c 10 0c 15 08 19 1a 1b 12 1d 11 0d 14 1e
+           1c 18 02 12 0f 13 1a 07 16 03 06 18 0a 19 03 04
+      --> To Physical Address 0xed3(1110110 10011, 0xed3) --> Value: 12
+
+Virtual Address 6890(0 11010 00100 10000):
+  --> pde index:0x07(11010)  pde contents:(0x7f, 01111111, valid 0, pfn 0x7f)
+  page 6c: e1 b5 a1 c1 b3 e4 a6 bd 7f 7f 7f 7f 7f 7f 7f 7f
+           7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f
+      --> Page not exists
+
+Virtual Address 0af6(0 00010 10111 10110):
+  --> pde index:0x02(00010)  pde contents:(0xa1, 10100001, valid 1, pfn 0x21)
+  page 6c: e1 b5 a1 c1 b3 e4 a6 bd 7f 7f 7f 7f 7f 7f 7f 7f
+           7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f
+  page 21: 7f 7f 36 8e 7f 33 d5 82 7f 7f 79 2b 7f 7f 7f 7f
+           7f f1 7f 7f 71 7f 7f 7f 63 7f 2f dd 67 7f f9 32
+    --> pte index:0x17(10111)  pte contents:(0x7f, valid 0, pfn 0x7f)
+      --> Page not exists
+
+Virtual Address 1e6f(0 00111 10011 01111):
+  --> pde index:0x07(00111)  pde contents:(0xbd, 10111101, valid 1, pfn 0x3d)
+  page 6c: e1 b5 a1 c1 b3 e4 a6 bd 7f 7f 7f 7f 7f 7f 7f 7f
+           7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f
+  page 3d: f6 7f 5d 4d 7f 04 29 7f 1e 7f ef 51 0c 1c 7f 7f
+           7f 76 d1 16 7f 17 ab 55 9a 65 ba 7f 7f 0b 7f 7f
+    --> pte index:0x13(10011)  pte contents:(0x16, valid 0, pfn 0x16)
+  disk 16: 00 0a 15 1a 03 00 09 13 1c 0a 18 03 13 07 17 1c
+           0d 15 0a 1a 0c 12 1e 11 0e 02 1d 10 15 14 07 13
+      --> To Disk Sector Address 0x2cf(0010110 01111) --> Value: 1c
+```
+
 ## 扩展思考题
 ---
 (1)请分析原理课的缺页异常的处理流程与lab3中的缺页异常的处理流程（分析粒度到函数级别）的异同之处。
