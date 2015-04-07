@@ -134,10 +134,13 @@ class scheduler:
     #choose next proc using FIFO/FCFS scheduling, If pid==-1, then pid=self.curr_proc
     def next_proc(self, pid=-1):
         #YOUR CODE
+        if len(self.proc_info[self.curr_proc][PROC_CODE]) == 0:
+            self.move_to_done(STATE_RUNNING)
+        else:
+            self.move_to_ready(STATE_RUNNING)
         for i in range(len(self.proc_info)):
             j = (self.curr_proc + i) % len(self.proc_info)
             if self.proc_info[j][PROC_STATE] == STATE_READY and not j == self.curr_proc:
-                self.move_to_ready(STATE_RUNNING)
                 self.curr_proc = j
                 self.move_to_running(STATE_READY)
                 break
