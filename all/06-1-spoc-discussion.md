@@ -60,7 +60,7 @@
 
 > 使用Python实现，Python代码：
 
-> ```
+```
 #! /usr/bin/env python
 
 import sys
@@ -240,7 +240,7 @@ else:
 
 > FIFO执行结果
 
-> ```
+```
 ARG policy FIFO
 ARG jobs 3
 ARG maxlen 10
@@ -265,7 +265,7 @@ Final statistics:
 
 > SJF执行结果
 
-> ```
+```
 ARG policy SJF
 ARG jobs 3
 ARG maxlen 10
@@ -290,7 +290,7 @@ Final statistics:
 
 > RR执行结果（时间片大小取2 sec）
 
-> ```
+```
 ARG policy RR
 ARG jobs 3
 ARG maxlen 10
