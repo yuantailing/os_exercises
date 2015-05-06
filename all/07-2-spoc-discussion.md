@@ -51,3 +51,53 @@ s.count--;              //有可用资源，占用该资源；
 ## 小组思考题
 
 1. （spoc） 每人用python threading机制用信号量和条件变量两种手段分别实现[47个同步问题](07-2-spoc-pv-problems.md)中的一题。向勇老师的班级从前往后，陈渝老师的班级从后往前。请先理解[]python threading 机制的介绍和实例](https://github.com/chyyuu/ucore_lab/tree/master/related_info/lab7/semaphore_condition)
+
+> 第16题，使用条件变量：
+
+```
+#coding=utf-8
+#!/usr/bin/env python
+
+import threading
+import time
+
+condition = threading.Condition()
+products = -1
+N = 10
+
+class Producer1(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+
+    def run(self):
+        global condition, products
+        while True:
+            if condition.acquire():
+                if products == 0:
+                    condition.wait();
+                products = 0;
+                print "pick white"
+                condition.notify()
+                condition.release()
+
+class Producer2(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+
+    def run(self):
+        global condition, products
+        while True:
+            if condition.acquire():
+                if products == 1:
+                    condition.wait();
+                products = 1;
+                print "pick black"
+                condition.notify()
+                condition.release()
+
+if __name__ == "__main__":
+    p1 = Producer1()
+    p1.start()
+    p2 = Producer2()
+    p2.start()
+```
