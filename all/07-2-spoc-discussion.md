@@ -74,8 +74,8 @@ class Producer1(threading.Thread):
         while True:
             if condition.acquire():
                 if products == 0:
-                    condition.wait();
-                products = 0;
+                    condition.wait()
+                products = 0
                 print "pick white"
                 condition.notify()
                 condition.release()
@@ -89,8 +89,8 @@ class Producer2(threading.Thread):
         while True:
             if condition.acquire():
                 if products == 1:
-                    condition.wait();
-                products = 1;
+                    condition.wait()
+                products = 1
                 print "pick black"
                 condition.notify()
                 condition.release()
